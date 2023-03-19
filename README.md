@@ -37,7 +37,7 @@ Next, after removing any rows with null values, we want to keep only the records
 ```no_null_df.loc[no_null_df['TotalCoinsMined'] >0]```
 
 ### Create a "CoinName" dataframe
-Then after dropping the "IsTrading" column, we create a new dataframe that holds only the "CoinName" which we will come back to later. Then drop the "CoinName" from the original dataframe since it will not be used in the clustering algorithm.
+Then after dropping the "IsTrading" column, we create a new dataframe that holds only the "CoinName" which we will come back to later. Next drop the "CoinName" from the original dataframe since it will not be used in the clustering algorithm.
 
 ### Use .get_dummies() to convert categorical data to indicator variables
 We are left with four columns, two of which have string-type data, "Algorithm", and "ProofType". For these two columns, we use the ```.get_dummies()``` method to make the values numeric.
@@ -45,12 +45,41 @@ We are left with four columns, two of which have string-type data, "Algorithm", 
 ![image of dataframe with indicator values on all columns]()
 
 ### Standardize the data for machine learning 
-Now that all the values are numeric, the data need to be standardized with StandardScaler from scikit-learn so they can be fit into machine learning models. This brings the values of columns to more or less look like standard normally distributed data.
+```from sklearn.preprocessing import StandardScaler```
+Now that all the columns have numeric values, the final preprocessing step is to standardize the data with StandardScaler from scikit-learn so they can be fit into machine learning models. This brings the values of columns to look more or less like standard normally distributed data.
 
 ![standardscaler code]()
 
+## Reducing the Data Dimensions using PCA
+```from sklearn.decomposition import PCA``` 
 
+Instantiate PCA
 
+```pca = PCA(n_components = 3)```
 
+Previously, .get_dummies() took 2 columns with string-type data and created 96 columns with numeric indicator variables. The PCA process will now reduce a total of 98 columns down to 3 principal components which are just the three main dimensions of variation that contain most of the information in the original dataset. Reducing the dataset to 3 components from 98 variables allows the machine learning models to speed up the algorithms when the number of input features is too high.
+ - Run the model on the data
 
+    ```crypto_pca = pca.fit_transform(crypto_scaled)```
+
+ - Create a new dataframe with the 3 principal components
+
+![image of pca code]()
+
+## Clustering Cryptocurrencies using K-means
+```from sklearn.cluster import Kmeans```
+- Find the best value of K using elbow curve. 
+
+![image of elbow_curve]()
+
+- Use the principal components data with K-means algorithm with a K value of 4, (n_clusters = 4), where the direction shifts in the curve.
+
+![image of K-means model]()
+
+## Visualizing Cryptocurrencies Results
+- 3D Scatter with Clusters
+
+![image of 3D scatter]()
+
+- 2D Scatter with "TotalCoinsMined" and "TotalCoinSupply"
 
