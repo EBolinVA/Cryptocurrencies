@@ -24,12 +24,12 @@ from sklearn.cluster import KMeans
 ## Preprocessing Data for Principal Component Analysis (PCA)
 
 The original dataset includes the column "IsTrading" which tells us whether the cryptocurrency is currently being traded.
-![image of original dataset]()
+![image of original dataset](https://github.com/EBolinVA/Cryptocurrencies/blob/main/Cryptocurrency_Images/Original_Dataset.png)
 
 ### Keep only currently trading cryptocurrencies
 We want to include only cryptocurrencies that are currently active, so we keep only the records where ```"IsTrading" == True```
 
-![image of code to keep only IsTrading ==True]()
+![image of code to keep only IsTrading ==True](https://github.com/EBolinVA/Cryptocurrencies/blob/main/Cryptocurrency_Images/Is_Trading_equal_True.png)
 
 ### Keep only cryptocurrencies that have been mined
 Next, after removing any rows with null values, we want to keep only the records of cryptocurrencies where coins have been mined. Here I used the ```.loc``` method to keep records with column "TotalCoinsMined" value greather than 0.
@@ -42,13 +42,13 @@ Then after dropping the "IsTrading" column, we create a new dataframe that holds
 ### Use .get_dummies() to convert categorical data to indicator variables
 We are left with four columns, two of which have string-type data, "Algorithm", and "ProofType". For these two columns, we use the ```.get_dummies()``` method to make the values numeric.
 
-![image of dataframe with indicator values on all columns]()
+![image of dataframe with indicator values on all columns](https://github.com/EBolinVA/Cryptocurrencies/blob/main/Cryptocurrency_Images/get_dummies_dataframe.png)
 
 ### Standardize the data for machine learning 
 ```from sklearn.preprocessing import StandardScaler```
 Now that all the columns have numeric values, the final preprocessing step is to standardize the data with StandardScaler from scikit-learn so they can be fit into machine learning models. This brings the values of columns to look more or less like standard normally distributed data.
 
-![standardscaler code]()
+![standardscaler code](https://github.com/EBolinVA/Cryptocurrencies/blob/main/Cryptocurrency_Images/StandardScaler.png)
 
 ## Reducing the Data Dimensions using PCA
 ```from sklearn.decomposition import PCA``` 
@@ -64,22 +64,24 @@ Previously, .get_dummies() took 2 columns with string-type data and created 96 c
 
  - Create a new dataframe with the 3 principal components
 
-![image of pca code]()
+![image of pca code](https://github.com/EBolinVA/Cryptocurrencies/blob/main/Cryptocurrency_Images/PCA_code.png)
 
 ## Clustering Cryptocurrencies using K-means
 ```from sklearn.cluster import Kmeans```
 - Find the best value of K using elbow curve. 
 
-![image of elbow_curve]()
+![image of elbow_curve](https://github.com/EBolinVA/Cryptocurrencies/blob/main/Cryptocurrency_Images/Elbow_curve.png)
 
 - Use the principal components data with K-means algorithm with a K value of 4, (n_clusters = 4), where the direction shifts in the curve.
 
-![image of K-means model]()
+![image of K-means model](https://github.com/EBolinVA/Cryptocurrencies/blob/main/Cryptocurrency_Images/K_means_model.png)
 
 ## Visualizing Cryptocurrencies Results
 - 3D Scatter with Clusters
 
-![image of 3D scatter]()
+![image of 3D scatter](https://github.com/EBolinVA/Cryptocurrencies/blob/main/Cryptocurrency_Images/3D_scatter.png)
 
 - 2D Scatter with "TotalCoinsMined" and "TotalCoinSupply"
+
+![image of 2D scatter](https://github.com/EBolinVA/Cryptocurrencies/blob/main/Cryptocurrency_Images/2D_scatter.png)
 
