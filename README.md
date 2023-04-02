@@ -85,3 +85,4 @@ Previously, .get_dummies() took 2 columns with string-type data and created 96 c
 
 ![image of 2D scatter](https://github.com/EBolinVA/Cryptocurrencies/blob/main/Cryptocurrency_Images/2D_scatter.png)
 
+End of Project
